@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+    {% block header %}
+    <div class="header">
+        <div class="logo"></div>
+
+        <ul class="menu">
+            <li><a href="/" class="item">Главная</a></li>
+            <li><a href="/about" class="item">О сайте</a></li>
+            <li><a href="/add_user" class="item">Добавить нового пользователя</a></li>
+            <li><a href="/users" class="item">Пользователи сайта</a></li>
+            <li><a href="/post" class="item">Выложить новость</a></li>
+        </ul>
+    </div>
+
+    {% endblock %}
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    {% block scripts %}
+        <script>
+            document.querySelector('a[href="' + location.pathname + '"]').className = 'marked';
+        </script>
+    {% endblock %}
+
+</body>
+</html>
