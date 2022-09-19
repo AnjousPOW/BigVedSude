@@ -18,7 +18,7 @@ app.config['SECRET_KEY'] = 'Your secret key'
 @app.route('/index')
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', posts=post)
 
 
 @app.route('/about')
@@ -34,26 +34,29 @@ def produsers():
         name = request.form.get('name')
         password = request.form.get('password')
         users.append(User(email, name, password))
-        return redirect(url_for('products'))
+        return redirect(url_for('produsers'))
 
     return render_template('add_user.html', form=form)
 
 
+
 @app.route('/post', methods=['GET', 'POST'])
 def prodpost():
-    if use_name in users:
-        if request.method == 'POST':
-            name = request.get('name')
-            text = request.get('text')
-            data = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-            post.append(Post(name, text, data))
+    if request.method == 'POST':
+        name = request.form.get('name')
+        text = request.form.get('text')
+        data = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        user_name = request.form.get('user_name')
 
+        for user in users:
+            if user.name == user_name:
+                post.append(Post(name, text, data, user.name))
+                break
+        else:
+            return render_template('post_examination.html', post=post)
+    print(post)
 
-
-    return render_template('add_user.html', post=post)
-
-
-
+    return render_template('post.html', post=post)
 
 
 

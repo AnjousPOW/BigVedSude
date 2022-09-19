@@ -1,14 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <
-    <form method="post">
-        {% for field in post %}
-            {{ field.label() }}
-            {{ field }}
-            {% for error in field.errors %}
-                {{ error }}
-            {% endfor %}
-        {% endfor %}
-    </form>
+    <form action="" method="post">
+    <div>
+        <div class="label">
+            <label for="user_name">Имя пользователя</label>
+        </div>
+        <div class="input">
+            <input type="text" name="user_name" id="user_name">
+        </div>
+    </div>
+
+    <div>
+        <div class="label">
+            <label for="name">Название Поста</label>
+        </div>
+        <div class="input">
+             <input type="text" name="name" id="name">
+        </div>
+
+    </div>
+         <div>
+        <div class="label">
+            <label for="text">Текст Поста</label>
+        </div>
+        <div class="input">
+             <input type="text" name="text" id="text">
+        </div>
+
+    </div>
+
+    <div>
+        <input type="submit" value="Добавить">
+    </div>
+
+</form>
 {% endblock %}
